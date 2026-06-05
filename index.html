@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>Advanced CC Generator - Premium Credit Card Generator</title>
-    <meta name="description" content="Advanced credit card generator for testing purposes with premium UI.">
+    <title>Advanced CC Generator</title>
+    <meta name="description" content="Advanced credit card generator with beautiful sky animation">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,246 +25,259 @@
             --primary: #4f46e5;
             --primary-hover: #4338ca;
             --primary-glow: rgba(79, 70, 229, 0.4);
-            --secondary-bg: rgba(241, 245, 249, 0.8);
+            --secondary-bg: rgba(255, 255, 255, 0.85);
             --card-bg: rgba(255, 255, 255, 0.95);
-            --border: rgba(226, 232, 240, 0.5);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.3);
+            --text-main: #1e293b;
+            --text-muted: #475569;
             --green: #10b981;
             --red: #ef4444;
-            --blue: #3b82f6;
             --radius-md: 12px;
             --radius-lg: 20px;
             --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
             --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+            --fast: all 0.2s ease;
+            --smooth: all 0.3s ease;
         }
 
         body.dark {
-            --primary: #6366f1;
-            --primary-hover: #818cf8;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --secondary-bg: rgba(39, 39, 42, 0.8);
-            --card-bg: rgba(24, 24, 27, 0.95);
-            --border: rgba(39, 39, 42, 0.5);
-            --text-main: #fafafa;
-            --text-muted: #a1a1aa;
+            --primary: #818cf8;
+            --primary-hover: #6366f1;
+            --secondary-bg: rgba(30, 41, 59, 0.85);
+            --card-bg: rgba(30, 41, 59, 0.95);
+            --border: rgba(255, 255, 255, 0.15);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
-            transition: var(--transition-smooth);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
-        .water-bg {
+        /* ============================================
+           BLUE SKY BACKGROUND
+           ============================================ */
+        .sky {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e90ff 0%, #87ceeb 50%, #b0e0e6 100%);
             overflow: hidden;
         }
 
-        body.dark .water-bg {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        body.dark .sky {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
         }
 
-        .wave {
+        /* Sun */
+        .sun {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.7c-155.6 0-200-40-400-40s-244.4 40-400 40v32h800v-32z' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat-x;
-            background-size: 800px 100px;
-            animation: wave 20s linear infinite;
-            opacity: 0.5;
-        }
-
-        body.dark .wave {
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.7c-155.6 0-200-40-400-40s-244.4 40-400 40v32h800v-32z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") repeat-x;
-        }
-
-        .wave:nth-child(2) {
-            bottom: 20px;
-            animation: wave 15s linear infinite reverse;
-            opacity: 0.3;
-        }
-
-        .wave:nth-child(3) {
-            bottom: 40px;
-            animation: wave 25s linear infinite;
-            opacity: 0.2;
-        }
-
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-800px); }
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            top: 50px;
+            right: 80px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffdd00, #ffaa00);
             border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-            pointer-events: none;
+            box-shadow: 0 0 50px rgba(255, 200, 0, 0.6);
+            animation: sunGlow 3s ease-in-out infinite;
+            z-index: -1;
         }
 
-        body.dark .particle {
-            background: rgba(255, 255, 255, 0.1);
+        body.dark .sun {
+            background: radial-gradient(circle, #fbbf24, #d97706);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        @keyframes sunGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
         }
 
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 100px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: floatCloud linear infinite;
+        }
+
+        body.dark .cloud {
+            background: rgba(100, 116, 139, 0.7);
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .cloud::before {
+            width: 50%;
+            height: 50%;
+            top: -40%;
+            left: 10%;
+        }
+
+        .cloud::after {
+            width: 70%;
+            height: 70%;
+            top: -30%;
+            right: 10%;
+        }
+
+        @keyframes floatCloud {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 24px;
+            color: #2c3e50;
+            animation: flyBird linear infinite;
+            z-index: -1;
+        }
+
+        body.dark .bird {
+            color: #64748b;
+        }
+
+        @keyframes flyBird {
+            0% { transform: translateX(-100px) translateY(0); }
+            25% { transform: translateX(25vw) translateY(-20px); }
+            50% { transform: translateX(50vw) translateY(10px); }
+            75% { transform: translateX(75vw) translateY(-15px); }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(0); }
+        }
+
+        /* Stars (Dark Mode) */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        body.dark .star {
+            opacity: 0.8;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Glass Effect */
         .glass {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border);
         }
 
+        /* Navigation */
         .navigations {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
-            height: 80px;
-            margin-bottom: 40px;
+            height: 65px;
+            margin-bottom: 30px;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: var(--transition-smooth);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
         }
 
         .site-header {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             color: var(--text-main);
             font-weight: 800;
-            font-size: 22px;
-            transition: var(--transition-smooth);
-        }
-
-        .site-header:hover {
-            transform: scale(1.02);
-            color: var(--primary);
+            font-size: 18px;
         }
 
         .header-logo {
-            height: 40px;
-        }
-
-        .advanced-badge {
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 0.5px;
-            margin-left: 15px;
-            box-shadow: var(--shadow-sm);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px var(--primary-glow); }
-            50% { box-shadow: 0 0 20px var(--primary-glow); }
-        }
-
-        .nav-center {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+            height: 32px;
         }
 
         .nav-center-text {
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 16px;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--primary), #a855f7);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .theme-toggle {
+        /* Theme Switch */
+        .theme-switch {
+            width: 50px;
+            height: 26px;
             background: var(--secondary-bg);
             border: 1px solid var(--border);
             border-radius: 50px;
-            padding: 10px 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: var(--transition-bounce);
-            color: var(--text-main);
-        }
-
-        .theme-toggle:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        .menu-container {
+            justify-content: space-between;
+            padding: 0 6px;
             position: relative;
         }
 
+        .theme-switch i {
+            font-size: 12px;
+            z-index: 1;
+        }
+
+        .theme-switch .fa-sun { color: #f59e0b; }
+        .theme-switch .fa-moon { color: #8b5cf6; }
+
+        .theme-switch .slider {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            left: 3px;
+            transition: var(--fast);
+        }
+
+        body.dark .theme-switch .slider {
+            left: 27px;
+        }
+
+        /* Menu */
+        .menu-container { position: relative; }
         .menu-toggle {
             cursor: pointer;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-radius: var(--radius-md);
-            color: var(--text-muted);
-            transition: var(--transition-bounce);
             background: var(--secondary-bg);
             border: 1px solid var(--border);
         }
-
-        .menu-toggle:hover {
-            color: var(--primary);
-            transform: rotate(90deg);
-        }
-
+        .menu-toggle:hover { background: var(--primary); color: white; }
         .dropdown-menu {
             position: absolute;
             right: 0;
@@ -274,413 +287,322 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             list-style: none;
-            min-width: 220px;
+            min-width: 160px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px) scale(0.95);
-            transition: var(--transition-smooth);
+            transform: translateY(-10px);
+            transition: var(--fast);
             z-index: 1000;
-            box-shadow: var(--shadow-lg);
         }
-
         .dropdown-menu.show {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
-
         .dropdown-menu li a {
             display: block;
-            padding: 12px 18px;
+            padding: 10px 16px;
             text-decoration: none;
             color: var(--text-main);
-            transition: var(--transition-smooth);
-            border-radius: 8px;
-            margin: 4px 8px;
+            font-size: 13px;
         }
-
-        .dropdown-menu li a:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateX(8px);
-        }
+        .dropdown-menu li a:hover { background: var(--primary); color: white; }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 1;
         }
 
+        /* BIN UI */
+        .bin-main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .bin-main-header {
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .bin-main-header:hover { background: var(--secondary-bg); }
+        .bin-main-header i { transition: transform 0.2s; }
+        .bin-main-header.open i { transform: rotate(180deg); }
+        .bin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            padding: 0 20px 20px 20px;
+        }
+        .bin-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+        .bin-item-header {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .bin-item-header:hover { background: var(--secondary-bg); }
+        .bin-item-header i { transition: transform 0.2s; font-size: 12px; }
+        .bin-item-header.open i { transform: rotate(180deg); }
+        .bin-item-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s;
+            background: var(--secondary-bg);
+        }
+        .bin-item-details.open {
+            max-height: 150px;
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+        }
+        .bin-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .bin-row:last-child { margin-bottom: 0; }
+        .bin-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .bin-value {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-family: monospace;
+            font-size: 11px;
+            cursor: pointer;
+            transition: var(--fast);
+        }
+        .bin-value:hover { background: var(--primary); color: white; transform: scale(1.02); }
+        .bin-live { border-color: var(--green); color: var(--green); }
+
+        /* Form */
+        .row { display: flex; flex-wrap: wrap; gap: 24px; }
+        .col-md-6 { flex: 1; min-width: 280px; }
         .app-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 28px;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-bounce);
+            padding: 24px;
         }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
+        .form-group { margin-bottom: 20px; }
         label {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
-
         .form-control {
             width: 100%;
-            height: 50px;
-            padding: 12px 18px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            height: 44px;
+            padding: 10px 14px;
+            font-size: 13px;
             background: var(--card-bg);
-            border: 2px solid var(--border);
+            border: 1px solid var(--border);
             border-radius: var(--radius-md);
             color: var(--text-main);
-            transition: var(--transition-smooth);
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-glow);
-            transform: scale(1.01);
+        .form-control:focus { outline: none; border-color: var(--primary); }
+        .input-group { display: flex; gap: 10px; }
+        .input-group-addon {
+            display: flex;
+            align-items: center;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 0 12px;
         }
+        .form-group-inline { display: flex; gap: 12px; }
+        .form-group-inline .form-group { flex: 1; margin-bottom: 0; }
 
+        /* Result */
         .result-container {
-            max-height: 500px;
+            max-height: 420px;
             overflow-y: auto;
             border-radius: var(--radius-md);
             background: var(--secondary-bg);
+            margin-top: 12px;
         }
-
         .result-card {
             display: block;
-            padding: 16px 20px;
+            padding: 12px 16px;
             border-bottom: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            transition: var(--transition-bounce);
-            cursor: pointer;
-            word-break: break-all;
-            background: var(--card-bg);
-            margin: 6px;
-            border-radius: 10px;
-        }
-
-        .result-card:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateX(8px) scale(1.02);
-        }
-
-        .result-card.copied-effect {
-            background: var(--green);
-            color: white;
-            transform: scale(1.02);
-            animation: pulse 0.4s ease;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .bin-section {
-            margin-bottom: 30px;
-        }
-
-        .bin-dropdown-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .bin-dropdown-header {
-            padding: 18px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .bin-dropdown-header:hover {
-            background: var(--secondary-bg);
-        }
-
-        .bin-dropdown-arrow {
-            transition: transform 0.4s ease;
-        }
-
-        .bin-dropdown-arrow.down {
-            transform: rotate(180deg);
-        }
-
-        .bin-dropdown-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--secondary-bg);
-        }
-
-        .bin-dropdown-details.show {
-            max-height: 600px;
-            padding: 20px 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        .bin-grid-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .bin-grid-container .bin-dropdown-card {
-            flex: 1 1 calc(50% - 20px);
-            margin-bottom: 0;
-        }
-
-        .bin-dropdown-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .bin-dropdown-value {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 16px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: monospace;
             font-size: 12px;
             cursor: pointer;
-            transition: var(--transition-bounce);
+            background: var(--card-bg);
+            margin: 4px;
+            border-radius: 8px;
+            transition: var(--fast);
         }
+        .result-card:hover { background: var(--primary); color: white; transform: translateX(4px); }
+        .result-card.copied-effect { background: var(--green); color: white; }
 
-        .bin-dropdown-value:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .bin-live {
-            border-color: var(--green);
-            color: var(--green);
-        }
-
+        /* Buttons */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 14px 24px;
+            gap: 10px;
+            padding: 12px 20px;
             border-radius: var(--radius-md);
             border: none;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
-            transition: var(--transition-bounce);
             width: 100%;
         }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-hover);
-            transform: translateY(-3px);
-        }
-
+        /* Toast */
         .toast-notification {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--text-main);
-            color: var(--bg-color);
-            padding: 14px 28px;
+            color: white;
+            padding: 10px 20px;
             border-radius: 50px;
             opacity: 0;
-            transition: var(--transition-bounce);
+            transition: var(--fast);
             z-index: 9999;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: var(--shadow-lg);
-            pointer-events: none;
+            font-size: 13px;
             white-space: nowrap;
         }
-
-        .toast-notification.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         footer {
             text-align: center;
-            padding: 40px;
-            margin-top: 60px;
+            padding: 30px;
+            margin-top: 40px;
             border-top: 1px solid var(--border);
             color: var(--text-muted);
+            font-size: 12px;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
         }
 
         @media (max-width: 768px) {
-            .form-group-inline {
-                flex-direction: column;
-            }
-            .bin-grid-container .bin-dropdown-card {
-                flex: 1 1 100%;
-            }
-            .toast-notification {
-                white-space: normal;
-                text-align: center;
-                max-width: 90%;
-            }
-            .nav-center-text {
-                font-size: 12px;
-            }
-            .advanced-badge {
-                display: none;
-            }
+            .form-group-inline { flex-direction: column; gap: 16px; }
+            .bin-grid { grid-template-columns: 1fr; }
+            .toast-notification { white-space: normal; max-width: 90%; text-align: center; }
+            .nav-center-text { font-size: 11px; }
+            .sun { width: 50px; height: 50px; top: 20px; right: 20px; }
         }
     </style>
 </head>
 
 <body>
-    <div class="water-bg">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
+    <!-- SKY BACKGROUND WITH ANIMATION -->
+    <div class="sky">
+        <!-- Sun -->
+        <div class="sun"></div>
+        
+        <!-- Clouds (will be added by JS) -->
+        
+        <!-- Birds (will be added by JS) -->
+        
+        <!-- Stars for dark mode -->
+        <div id="starsContainer"></div>
     </div>
 
     <div id="app">
         <nav class="navigations glass">
-            <div class="nav-left">
-                <a href="#" class="site-header">
-                    <img src="favicon.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
-                    <span>Advanced CC Generatorator</span>
-                </a>
-                <div class="advanced-badge">
-                    <i class="fas fa-star"></i> ADVANCED
-                </div>
-            </div>
+            <a href="#" class="site-header">
+                <img src="favicon.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+                <span></span>
+            </a>
             <div class="nav-center">
-                <span class="nav-center-text">
-                    <i class="fas fa-bolt"></i> <i class="fas fa-robot"></i>
-                </span>
+                <span class="nav-center-text"><i class="fas fa-bolt"></i> Advanced CC Generator <i class="fas fa-robot"></i></span>
             </div>
             <div class="nav-right">
-                <button id="themeToggle" class="theme-toggle">
+                <div id="themeSwitch" class="theme-switch">
+                    <i class="fas fa-sun"></i>
                     <i class="fas fa-moon"></i>
-                    <span>Dark Mode</span>
-                </button>
+                    <div class="slider"></div>
+                </div>
                 <div class="menu-container">
                     <div id="menuToggleBtn" class="menu-toggle">
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                     <ul id="dropdown-menu" class="dropdown-menu">
-                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
-                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="container">
-            <div class="bin-section">
-                <div class="bin-dropdown-card glass">
-                    <div onclick="toggleDropdown(this)" class="bin-dropdown-header">
-                        <div class="bin-dropdown-title"><i class="fa-solid fa-layer-group" style="color: var(--primary);"></i> Available BINs</div>
-                        <i class="fa-solid fa-chevron-down bin-dropdown-arrow"></i>
+            <!-- BIN SECTION -->
+            <div class="bin-main-card glass">
+                <div id="binMainHeader" class="bin-main-header">
+                    <div><i class="fa-solid fa-layer-group" style="color: var(--primary);"></i> Available BINs</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div id="binGrid" class="bin-grid" style="display: none;">
+                    <div class="bin-item">
+                        <div class="bin-item-header">
+                            <div><i class="fa-brands fa-youtube" style="color: #ef4444;"></i> YouTube Premium</div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="bin-item-details">
+                            <div class="bin-row"><span class="bin-label">BIN:</span><span class="bin-value bin-live" data-copy="559888065183xxxx">559888065183xxxx</span></div>
+                            <div class="bin-row"><span class="bin-label">Country:</span><span class="bin-value">Bangladesh</span></div>
+                        </div>
                     </div>
-                    <div class="bin-dropdown-details">
-                        <div class="bin-grid-container">
-                            <div class="bin-dropdown-card glass">
-                                <div onclick="toggleDropdown(this)" class="bin-dropdown-header">
-                                    <div class="bin-dropdown-title"><i class="fa-brands fa-youtube" style="color: #ef4444;"></i> YouTube Premium</div>
-                                    <i class="fa-solid fa-chevron-down bin-dropdown-arrow"></i>
-                                </div>
-                                <div class="bin-dropdown-details">
-                                    <div class="bin-dropdown-row">
-                                        <span class="bin-dropdown-label">BIN:</span>
-                                        <span class="bin-dropdown-value bin-live" data-copy="559888065183xxxx">559888065183xxxx</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bin-dropdown-card glass">
-                                <div onclick="toggleDropdown(this)" class="bin-dropdown-header">
-                                    <div class="bin-dropdown-title"><i class="fa-solid fa-shield-halved" style="color: #3b82f6;"></i> Hotspot Shield</div>
-                                    <i class="fa-solid fa-chevron-down bin-dropdown-arrow"></i>
-                                </div>
-                                <div class="bin-dropdown-details">
-                                    <div class="bin-dropdown-row">
-                                        <span class="bin-dropdown-label">BIN:</span>
-                                        <span class="bin-dropdown-value bin-live" data-copy="41546444006xxxxx">41546444006xxxxx</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bin-dropdown-card glass">
-                                <div onclick="toggleDropdown(this)" class="bin-dropdown-header">
-                                    <div class="bin-dropdown-title"><i class="fa-brands fa-chatgpt" style="color: #10a37f;"></i> ChatGPT Plus</div>
-                                    <i class="fa-solid fa-chevron-down bin-dropdown-arrow"></i>
-                                </div>
-                                <div class="bin-dropdown-details">
-                                    <div class="bin-dropdown-row">
-                                        <span class="bin-dropdown-label">BIN:</span>
-                                        <span class="bin-dropdown-value bin-live" data-copy="62584005xxxxxxxx">62584005xxxxxxxx</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bin-dropdown-card glass">
-                                <div onclick="toggleDropdown(this)" class="bin-dropdown-header">
-                                    <div class="bin-dropdown-title"><i class="fa-brands fa-stripe" style="color: #6366f1;"></i> Stripe BIN</div>
-                                    <i class="fa-solid fa-chevron-down bin-dropdown-arrow"></i>
-                                </div>
-                                <div class="bin-dropdown-details">
-                                    <div class="bin-dropdown-row">
-                                        <span class="bin-dropdown-label">BIN 1:</span>
-                                        <span class="bin-dropdown-value bin-live" data-copy="37435512xxxxxxxx">37435512xxxxxxxx</span>
-                                    </div>
-                                    <div class="bin-dropdown-row">
-                                        <span class="bin-dropdown-label">BIN 2:</span>
-                                        <span class="bin-dropdown-value bin-live" data-copy="37936303xxxxxxxx">37936303xxxxxxxx</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="bin-item">
+                        <div class="bin-item-header">
+                            <div><i class="fa-solid fa-shield-halved" style="color: #3b82f6;"></i> Hotspot Shield</div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="bin-item-details">
+                            <div class="bin-row"><span class="bin-label">BIN:</span><span class="bin-value bin-live" data-copy="41546444006xxxxx">41546444006xxxxx</span></div>
+                            <div class="bin-row"><span class="bin-label">Date:</span><span class="bin-value">10/27</span></div>
+                        </div>
+                    </div>
+                    <div class="bin-item">
+                        <div class="bin-item-header">
+                            <div><i class="fa-brands fa-chatgpt" style="color: #10a37f;"></i> ChatGPT Plus</div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="bin-item-details">
+                            <div class="bin-row"><span class="bin-label">BIN:</span><span class="bin-value bin-live" data-copy="62584005xxxxxxxx">62584005xxxxxxxx</span></div>
+                        </div>
+                    </div>
+                    <div class="bin-item">
+                        <div class="bin-item-header">
+                            <div><i class="fa-brands fa-stripe" style="color: #6366f1;"></i> Stripe BIN</div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="bin-item-details">
+                            <div class="bin-row"><span class="bin-label">BIN 1:</span><span class="bin-value bin-live" data-copy="37435512xxxxxxxx">37435512xxxxxxxx</span></div>
+                            <div class="bin-row"><span class="bin-label">BIN 2:</span><span class="bin-value bin-live" data-copy="37936303xxxxxxxx">37936303xxxxxxxx</span></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row" style="display: flex; flex-wrap: wrap; gap: 24px;">
-                <div class="col-md-6" style="flex: 1; min-width: 280px;">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="app-card glass">
                         <form onsubmit="return false;">
                             <div class="form-group">
@@ -689,8 +611,8 @@
                             </div>
                             <div class="form-group">
                                 <label><i class="fa-solid fa-calendar"></i> Date</label>
-                                <div class="input-group" style="display: flex; gap: 12px;">
-                                    <span class="input-group-addon" style="display: flex; align-items: center; background: var(--bg-color); padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border);"><input type="checkbox" id="enableDate" checked></span>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><input type="checkbox" id="enableDate" checked></span>
                                     <select id="month" class="form-control">
                                         <option value="">Random</option>
                                         <option value="01">01</option><option value="02">02</option><option value="03">03</option>
@@ -698,40 +620,37 @@
                                         <option value="07">07</option><option value="08">08</option><option value="09">09</option>
                                         <option value="10">10</option><option value="11">11</option><option value="12">12</option>
                                     </select>
-                                    <select id="year" class="form-control">
-                                        <option value="">Random</option>
-                                    </select>
+                                    <select id="year" class="form-control"><option value="">Random</option></select>
                                 </div>
                             </div>
-                            <div class="form-group-inline" style="display: flex; gap: 16px;">
-                                <div class="form-group" style="flex: 1;">
+                            <div class="form-group-inline">
+                                <div class="form-group">
                                     <label><i class="fa-solid fa-lock"></i> CVC</label>
-                                    <div class="input-group" style="display: flex; gap: 12px;">
-                                        <span class="input-group-addon" style="display: flex; align-items: center; background: var(--bg-color); padding: 0 12px; border-radius: var(--radius-md); border: 1px solid var(--border);"><input type="checkbox" id="enableCvc" checked></span>
-                                        <input type="text" id="cvc" class="form-control" placeholder="Random or pattern">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><input type="checkbox" id="enableCvc" checked></span>
+                                        <input type="text" id="cvc" class="form-control" placeholder="Random">
                                     </div>
                                 </div>
-                                <div class="form-group" style="flex: 1;">
+                                <div class="form-group">
                                     <label for="quantity"><i class="fa-solid fa-hashtag"></i> Quantity</label>
                                     <input type="number" id="quantity" class="form-control" value="10" max="100">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" id="generateBtn" class="btn btn-primary"><i class="fa-solid fa-gear"></i> Generate Cards</button>
+                                <button type="submit" id="generateBtn" class="btn btn-primary"><i class="fa-solid fa-gear"></i> Generate</button>
                             </div>
                         </form>
-                        <button id="copyAllBtn" class="btn btn-primary" style="margin-top: 10px;"><i class="fa-regular fa-copy"></i> Copy All Cards</button>
+                        <button id="copyAllBtn" class="btn btn-primary"><i class="fa-regular fa-copy"></i> Copy All</button>
                     </div>
                 </div>
 
-                <div class="col-md-6" style="flex: 1; min-width: 280px;">
+                <div class="col-md-6">
                     <div class="app-card glass">
-                        <label><i class="fa-solid fa-terminal"></i> Result Output (<span id="cardCount">0</span> cards) - <span style="color: var(--primary);">✨ Click card to copy</span></label>
-                        <div id="resultContainer" class="result-container" style="min-height: 400px; margin-top: 15px;">
+                        <label><i class="fa-solid fa-terminal"></i> Result (<span id="cardCount">0</span>) - <span style="color: var(--primary);">✨ Click to copy</span></label>
+                        <div id="resultContainer" class="result-container">
                             <div style="padding: 50px; text-align: center; color: var(--text-muted);">
-                                <i class="fa-solid fa-credit-card" style="font-size: 50px; margin-bottom: 15px; display: block; opacity: 0.5;"></i>
-                                Generate cards to see results<br>
-                                <span style="font-size: 12px;">✨ Click on any card to copy instantly ✨</span>
+                                <i class="fa-solid fa-cloud-sun" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
+                                Generate cards
                             </div>
                         </div>
                     </div>
@@ -740,334 +659,280 @@
         </div>
 
         <footer class="glass">
-            <p><i class="fas fa-gem" style="color: var(--primary);"></i> Advanced CC Generator © 2026 <i class="fas fa-gem" style="color: var(--primary);"></i></p>
+            <p>✨ Advanced CC Generator ✨</p>
         </footer>
     </div>
 
+    <div id="toast-notification" class="toast-notification"></div>
+
     <script>
-        // Create particles
-        function createParticles() {
-            const waterBg = document.querySelector('.water-bg');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.width = Math.random() * 6 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.bottom = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = Math.random() * 6 + 4 + 's';
-                waterBg.appendChild(particle);
+        // ============================================
+        // SKY ANIMATION - CLOUDS & BIRDS
+        // ============================================
+        
+        function createClouds() {
+            const sky = document.querySelector('.sky');
+            const cloudCount = 5;
+            const cloudSizes = [120, 150, 100, 180, 130];
+            const cloudSpeeds = [15, 20, 12, 25, 18];
+            const cloudTops = ['10%', '20%', '40%', '15%', '60%'];
+            
+            for (let i = 0; i < cloudCount; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.style.width = cloudSizes[i] + 'px';
+                cloud.style.height = (cloudSizes[i] * 0.4) + 'px';
+                cloud.style.top = cloudTops[i];
+                cloud.style.animationDuration = cloudSpeeds[i] + 's';
+                cloud.style.animationDelay = (i * 3) + 's';
+                cloud.style.opacity = 0.8;
+                sky.appendChild(cloud);
             }
         }
-
-        // Theme
+        
+        function createBirds() {
+            const sky = document.querySelector('.sky');
+            const birdCount = 3;
+            const birdTypes = ['🐦', '🕊️', '🐧', '🦅'];
+            
+            for (let i = 0; i < birdCount; i++) {
+                const bird = document.createElement('div');
+                bird.className = 'bird';
+                bird.innerHTML = birdTypes[Math.floor(Math.random() * birdTypes.length)];
+                bird.style.top = (20 + Math.random() * 40) + '%';
+                bird.style.animationDuration = (12 + Math.random() * 8) + 's';
+                bird.style.animationDelay = (i * 5) + 's';
+                bird.style.fontSize = (20 + Math.random() * 10) + 'px';
+                sky.appendChild(bird);
+            }
+        }
+        
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.animationDuration = (2 + Math.random() * 3) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        createClouds();
+        createBirds();
+        createStars();
+        
+        // ============================================
+        // BIN UI TOGGLE
+        // ============================================
+        const binMainHeader = document.getElementById('binMainHeader');
+        const binGrid = document.getElementById('binGrid');
+        
+        binMainHeader.addEventListener('click', () => {
+            const isOpen = binGrid.style.display === 'grid';
+            binGrid.style.display = isOpen ? 'none' : 'grid';
+            binMainHeader.classList.toggle('open');
+        });
+        
+        document.querySelectorAll('.bin-item-header').forEach(header => {
+            header.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const details = header.nextElementSibling;
+                details.classList.toggle('open');
+                header.classList.toggle('open');
+            });
+        });
+        
+        // ============================================
+        // THEME SWITCH
+        // ============================================
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
                 document.body.classList.add('dark');
-                updateThemeButton(true);
-            } else {
-                updateThemeButton(false);
             }
         }
-
-        function updateThemeButton(isDark) {
-            const themeBtn = document.getElementById('themeToggle');
-            if (themeBtn) {
-                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i><span>Light Mode</span>' : '<i class="fas fa-moon"></i><span>Dark Mode</span>';
+        
+        document.getElementById('themeSwitch').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        });
+        initTheme();
+        
+        // ============================================
+        // MENU
+        // ============================================
+        document.getElementById('menuToggleBtn').addEventListener('click', () => {
+            document.getElementById('dropdown-menu').classList.toggle('show');
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.menu-container')) {
+                document.getElementById('dropdown-menu')?.classList.remove('show');
             }
-        }
-
-        function toggleTheme() {
-            const isDark = document.body.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeButton(isDark);
-        }
-
-        // Menu
-        function toggleMenu() {
-            document.getElementById('dropdown-menu')?.classList.toggle('show');
-        }
-
-        // BIN Dropdown
-        function toggleDropdown(element) {
-            const card = element.closest('.bin-dropdown-card');
-            if (!card) return;
-            const details = card.querySelector('.bin-dropdown-details');
-            const arrow = card.querySelector('.bin-dropdown-arrow');
-            if (details && arrow) {
-                details.classList.toggle('show');
-                arrow.classList.toggle('down');
-            }
-        }
-
-        // Notification
-        function showNotification(msg, isError = false) {
-            let toast = document.getElementById('toast-notification');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'toast-notification';
-                toast.className = 'toast-notification';
-                document.body.appendChild(toast);
-            }
-            toast.innerHTML = msg;
-            toast.style.background = isError ? 'var(--red)' : 'var(--text-main)';
-            toast.style.color = 'white';
+        });
+        
+        // ============================================
+        // TOAST
+        // ============================================
+        function showNotification(msg, isErr = false) {
+            const toast = document.getElementById('toast-notification');
+            toast.innerHTML = (isErr ? '❌ ' : '✅ ') + msg;
+            toast.style.background = isErr ? 'var(--red)' : 'var(--text-main)';
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
+            setTimeout(() => toast.classList.remove('show'), 2000);
         }
-
-        // Copy to Clipboard
-        async function copyToClipboard(text, element = null) {
+        
+        // ============================================
+        // COPY
+        // ============================================
+        async function copyToClipboard(text, el = null) {
             try {
                 if (navigator.clipboard && window.isSecureContext) {
                     await navigator.clipboard.writeText(text);
                 } else {
-                    const textarea = document.createElement('textarea');
-                    textarea.value = text;
-                    document.body.appendChild(textarea);
-                    textarea.select();
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    document.body.appendChild(ta);
+                    ta.select();
                     document.execCommand('copy');
-                    document.body.removeChild(textarea);
+                    document.body.removeChild(ta);
                 }
-                if (element) {
-                    element.classList.add('copied-effect');
-                    setTimeout(() => element.classList.remove('copied-effect'), 400);
+                if (el) {
+                    el.classList.add('copied-effect');
+                    setTimeout(() => el.classList.remove('copied-effect'), 300);
                 }
-                const shortText = text.length > 45 ? text.substring(0, 45) + '...' : text;
-                showNotification(`✅ Copied: ${shortText}`);
-                return true;
-            } catch (err) {
-                showNotification('❌ Copy failed!', true);
-                return false;
+                showNotification(text.length > 40 ? text.substring(0, 40) + '...' : text);
+            } catch {
+                showNotification('Copy failed!', true);
             }
         }
-
-        // Copy All Cards - FIXED
-        function copyAllCards() {
-            const cards = Array.from(document.querySelectorAll('.result-card'))
-                .map(el => el.getAttribute('data-card-value') || el.textContent.trim());
-            
-            if (cards.length === 0) {
-                showNotification('❌ No cards to copy! Generate first.', true);
-                return;
-            }
-            
-            const allCardsText = cards.join('\n');
-            
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(allCardsText).then(() => {
-                    showNotification(`✅ Copied ${cards.length} cards successfully!`);
-                    const copyBtn = document.getElementById('copyAllBtn');
-                    if (copyBtn) {
-                        const originalHtml = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                        copyBtn.style.background = 'var(--green)';
-                        setTimeout(() => {
-                            copyBtn.innerHTML = originalHtml;
-                            copyBtn.style.background = '';
-                        }, 1500);
-                    }
-                }).catch(() => {
-                    showNotification('❌ Copy failed!', true);
-                });
-            } else {
-                const textarea = document.createElement('textarea');
-                textarea.value = allCardsText;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showNotification(`✅ Copied ${cards.length} cards successfully!`);
-                const copyBtn = document.getElementById('copyAllBtn');
-                if (copyBtn) {
-                    const originalHtml = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                    copyBtn.style.background = 'var(--green)';
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalHtml;
-                        copyBtn.style.background = '';
-                    }, 1500);
-                }
-            }
-        }
-
-        // Display Cards
-        function displayCards(cards) {
-            const container = document.getElementById('resultContainer');
-            const cardCountSpan = document.getElementById('cardCount');
-            if (!cards || cards.length === 0) {
-                container.innerHTML = `<div style="padding: 50px; text-align: center; color: var(--text-muted);">
-                    <i class="fa-solid fa-credit-card" style="font-size: 50px; margin-bottom: 15px; display: block;"></i>
-                    No cards generated<br>
-                    <span style="font-size: 12px;">✨ Generate cards above ✨</span>
-                </div>`;
-                cardCountSpan.textContent = '0';
-                return;
-            }
-            cardCountSpan.textContent = cards.length;
-            container.innerHTML = cards.map((card, index) => `
-                <div class="result-card" data-card-value="${escapeHtml(card).replace(/"/g, '&quot;')}">
-                    ${escapeHtml(card)}
-                </div>
-            `).join('');
-            document.querySelectorAll('.result-card').forEach(el => {
-                el.addEventListener('click', function() {
-                    copyToClipboard(this.getAttribute('data-card-value') || this.textContent.trim(), this);
-                });
-            });
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        // Card Generation Functions
-        function getCardType(cardNumber) {
-            const cleaned = cardNumber.replace(/\D/g, '');
-            if (cleaned.startsWith('4')) return 'visa';
-            if (cleaned.startsWith('34') || cleaned.startsWith('37')) return 'amex';
-            if (/^(5[1-5]|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)/.test(cleaned)) return 'mastercard';
-            if (cleaned.startsWith('6011') || cleaned.startsWith('65')) return 'discover';
-            if (cleaned.startsWith('62')) return 'unionpay';
-            if (cleaned.startsWith('35')) return 'jcb';
-            return 'unknown';
-        }
-
-        function luhnCheck(number) {
-            let sum = 0, alt = false;
-            for (let i = number.length - 1; i >= 0; i--) {
-                let digit = parseInt(number.charAt(i));
-                if (alt) { digit *= 2; if (digit > 9) digit -= 9; }
-                sum += digit;
-                alt = !alt;
-            }
-            return sum % 10 === 0;
-        }
-
-        function generateCardNumber(bin) {
-            const cleanBin = bin.replace(/\D/g, '');
-            const cardType = getCardType(cleanBin);
-            const length = cardType === 'amex' ? 15 : 16;
-            let partial = cleanBin;
-            while (partial.length < length - 1) partial += Math.floor(Math.random() * 10);
-            let sum = 0, alt = true;
-            for (let i = partial.length - 1; i >= 0; i--) {
-                let digit = parseInt(partial.charAt(i));
-                if (alt) { digit *= 2; if (digit > 9) digit -= 9; }
-                sum += digit;
-                alt = !alt;
-            }
-            const checkDigit = (10 - (sum % 10)) % 10;
-            const fullNumber = partial + checkDigit;
-            if (!luhnCheck(fullNumber) || fullNumber.length !== length) return generateCardNumber(bin);
-            return fullNumber;
-        }
-
-        function generateCVV(cardType, pattern) {
-            const length = cardType === 'amex' ? 4 : 3;
-            if (pattern && pattern.length) {
-                let result = '';
-                for (let i = 0; i < length; i++) {
-                    const ch = pattern[i] ? pattern[i].toLowerCase() : 'x';
-                    if (ch === 'x') result += Math.floor(Math.random() * 10);
-                    else if (/\d/.test(ch)) result += ch;
-                    else result += Math.floor(Math.random() * 10);
-                }
-                return result;
-            }
-            let cvv = '';
-            for (let i = 0; i < length; i++) cvv += Math.floor(Math.random() * 10);
-            return cvv;
-        }
-
-        function populateYears() {
-            const yearSelect = document.getElementById('year');
-            const currentYear = new Date().getFullYear();
-            yearSelect.innerHTML = '<option value="">Random</option>';
-            for (let y = currentYear; y <= currentYear + 15; y++) {
-                yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
-            }
-        }
-
-        function generate() {
-            const binInput = document.getElementById('bin').value.trim();
-            if (!binInput) {
-                showNotification('❌ Please enter a BIN.', true);
-                return;
-            }
-            let binValue = binInput;
-            let fixedMonth = '', fixedYear = '', fixedCvc = '';
-            if (binInput.includes('|')) {
-                const parts = binInput.split('|');
-                binValue = parts[0];
-                if (parts[1]) fixedMonth = parts[1];
-                if (parts[2]) fixedYear = parts[2];
-                if (parts[3]) fixedCvc = parts[3];
-            }
-            const cleanBin = binValue.replace(/\D/g, '');
-            if (cleanBin.length < 6) {
-                showNotification('❌ BIN must be at least 6 digits.', true);
-                return;
-            }
-            const quantity = Math.min(parseInt(document.getElementById('quantity').value) || 10, 100);
-            const enableDate = document.getElementById('enableDate').checked;
-            const enableCvc = document.getElementById('enableCvc').checked;
-            const monthVal = fixedMonth || document.getElementById('month').value;
-            const yearVal = fixedYear || document.getElementById('year').value;
-            const cvcVal = fixedCvc || document.getElementById('cvc').value;
-            const cardType = getCardType(cleanBin);
-            const cards = [];
-            for (let i = 0; i < quantity; i++) {
-                let card = generateCardNumber(cleanBin);
-                if (enableDate) {
-                    let month = monthVal || String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
-                    let year = yearVal || String(new Date().getFullYear() + Math.floor(Math.random() * 11));
-                    if (year.length === 2) year = '20' + year;
-                    card += `|${month}|${year}`;
-                }
-                if (enableCvc) {
-                    let cvv = cvcVal || generateCVV(cardType, '');
-                    card += `|${cvv}`;
-                }
-                cards.push(card);
-            }
-            displayCards(cards);
-            showNotification(`✨ Generated ${cards.length} cards! ✨`);
-        }
-
-        // Initialize BIN copy
-        document.querySelectorAll('.bin-dropdown-value').forEach(el => {
+        
+        document.querySelectorAll('.bin-value').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.stopPropagation();
                 copyToClipboard(el.getAttribute('data-copy') || el.textContent.trim(), el);
             });
         });
-
-        // DOM Ready
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            initTheme();
-            populateYears();
-            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-            document.getElementById('menuToggleBtn').addEventListener('click', toggleMenu);
-            document.getElementById('generateBtn').addEventListener('click', generate);
-            document.getElementById('copyAllBtn').addEventListener('click', copyAllCards);
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.menu-container')) {
-                    document.getElementById('dropdown-menu')?.classList.remove('show');
+        
+        // ============================================
+        // CARD GENERATION
+        // ============================================
+        function getCardType(cn) {
+            const c = cn.replace(/\D/g, '');
+            if (c.startsWith('4')) return 'visa';
+            if (c.startsWith('34') || c.startsWith('37')) return 'amex';
+            if (/^(5[1-5]|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)/.test(c)) return 'mastercard';
+            if (c.startsWith('6011') || c.startsWith('65')) return 'discover';
+            if (c.startsWith('62')) return 'unionpay';
+            if (c.startsWith('35')) return 'jcb';
+            return 'unknown';
+        }
+        
+        function luhnCheck(n) {
+            let s = 0, alt = false;
+            for (let i = n.length - 1; i >= 0; i--) {
+                let d = parseInt(n.charAt(i));
+                if (alt) { d *= 2; if (d > 9) d -= 9; }
+                s += d;
+                alt = !alt;
+            }
+            return s % 10 === 0;
+        }
+        
+        function generateCardNumber(bin) {
+            const clean = bin.replace(/\D/g, '');
+            const type = getCardType(clean);
+            const len = type === 'amex' ? 15 : 16;
+            let p = clean;
+            while (p.length < len - 1) p += Math.floor(Math.random() * 10);
+            let s = 0, alt = true;
+            for (let i = p.length - 1; i >= 0; i--) {
+                let d = parseInt(p.charAt(i));
+                if (alt) { d *= 2; if (d > 9) d -= 9; }
+                s += d;
+                alt = !alt;
+            }
+            const cd = (10 - (s % 10)) % 10;
+            const full = p + cd;
+            if (!luhnCheck(full) || full.length !== len) return generateCardNumber(bin);
+            return full;
+        }
+        
+        function generateCVV(type) {
+            const len = type === 'amex' ? 4 : 3;
+            let cvv = '';
+            for (let i = 0; i < len; i++) cvv += Math.floor(Math.random() * 10);
+            return cvv;
+        }
+        
+        function populateYears() {
+            const ys = document.getElementById('year');
+            const cy = new Date().getFullYear();
+            ys.innerHTML = '<option value="">Random</option>';
+            for (let y = cy; y <= cy + 15; y++) ys.innerHTML += `<option value="${y}">${y}</option>`;
+        }
+        
+        function displayCards(cards) {
+            const cont = document.getElementById('resultContainer');
+            const countSpan = document.getElementById('cardCount');
+            if (!cards.length) {
+                cont.innerHTML = `<div style="padding:50px;text-align:center;color:var(--text-muted);"><i class="fa-solid fa-cloud-sun" style="font-size:40px;"></i><br>No cards</div>`;
+                countSpan.textContent = '0';
+                return;
+            }
+            countSpan.textContent = cards.length;
+            cont.innerHTML = cards.map(c => `<div class="result-card" data-card="${escapeHtml(c)}">${escapeHtml(c)}</div>`).join('');
+            document.querySelectorAll('.result-card').forEach(el => {
+                el.addEventListener('click', () => copyToClipboard(el.getAttribute('data-card'), el));
+            });
+        }
+        
+        function escapeHtml(s) {
+            return s.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+        }
+        
+        function generate() {
+            let bin = document.getElementById('bin').value.trim();
+            if (!bin) { showNotification('Enter BIN', true); return; }
+            const clean = bin.replace(/\D/g, '');
+            if (clean.length < 6) { showNotification('BIN >= 6 digits', true); return; }
+            const qty = Math.min(parseInt(document.getElementById('quantity').value) || 10, 100);
+            const enDate = document.getElementById('enableDate').checked;
+            const enCvc = document.getElementById('enableCvc').checked;
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+            const type = getCardType(clean);
+            const cards = [];
+            for (let i = 0; i < qty; i++) {
+                let card = generateCardNumber(clean);
+                if (enDate) {
+                    let m = month || String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+                    let y = year || String(new Date().getFullYear() + Math.floor(Math.random() * 11));
+                    if (y.length === 2) y = '20' + y;
+                    card += `|${m}|${y}`;
                 }
-            });
-            document.getElementById('bin').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') generate();
-            });
-        });
+                if (enCvc) card += `|${generateCVV(type)}`;
+                cards.push(card);
+            }
+            displayCards(cards);
+            showNotification(`✨ ${cards.length} cards generated! ✨`);
+        }
+        
+        function copyAllCards() {
+            const cards = Array.from(document.querySelectorAll('.result-card')).map(el => el.getAttribute('data-card'));
+            if (!cards.length) { showNotification('No cards to copy', true); return; }
+            copyToClipboard(cards.join('\n'));
+        }
+        
+        document.getElementById('generateBtn').addEventListener('click', generate);
+        document.getElementById('copyAllBtn').addEventListener('click', copyAllCards);
+        document.getElementById('bin').addEventListener('keypress', e => { if (e.key === 'Enter') generate(); });
+        populateYears();
+        displayCards([]);
     </script>
 </body>
 
